@@ -1,10 +1,10 @@
 import { createStore } from "zustand/vanilla"
-import { persist } from "zustand/middleware"
+import { persist, subscribeWithSelector } from "zustand/middleware"
 import { PrStore, PullRequest } from "./types"
 
 export const prStore = createStore<PrStore>()(
 	persist(
-		(set, get) => ({
+		subscribeWithSelector((set, get) => ({
 			pullRequests: [],
 			addOrUpdateStoredPullRequest: (pullRequest) => {
 				if (prExists(pullRequest, get().pullRequests)) {
@@ -29,7 +29,7 @@ export const prStore = createStore<PrStore>()(
 				}
 				get().addOrUpdateStoredPullRequest(updatedPr)
 			},
-		}),
+		})),
 		{ name: "pr-store" },
 	),
 )

@@ -1,7 +1,7 @@
 import { PullRequest } from "./types"
 import { getFiles } from "./file"
 
-const getPrId = (): number => {
+export const getCurrentPrId = (): number => {
 	const location = window.location.href
 	const regex = /pull-requests\/(\d+)\//
 	const match = location.match(regex)
@@ -14,7 +14,7 @@ const getPrId = (): number => {
 
 export const getCurrentPullRequest = (): PullRequest => {
 	return {
-		id: getPrId(),
+		id: getCurrentPrId(),
 		files: getFiles(),
 	}
 }
