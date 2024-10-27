@@ -1,0 +1,19 @@
+{
+  "name": "Bitbucket Data Center Pull Request Helper",
+  "version": "1.0",
+  "description": "Help with code review on Bitbucket Data Center",
+  "manifest_version": 3,
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://git.vegvesen.no/*"
+  ],
+  "background": {
+    "service_worker": "serviceWorker.js",
+    "type": "module"
+  }
+}

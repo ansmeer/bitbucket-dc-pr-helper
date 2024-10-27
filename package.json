@@ -1,0 +1,22 @@
+{
+  "name": "bitbucket-dc-pr-helper",
+  "version": "0.1",
+  "description": "Chrome extension to help with code review on Bitbucket Data Center",
+  "scripts": {
+    "build": "npx rollup -c"
+  },
+  "author": "Luisa Möhle",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-typescript": "^12.1.1",
+    "prettier": "^3.3.3",
+    "rollup": "^4.24.0",
+    "tslib": "^2.8.0",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "zustand": "^5.0.0"
+  }
+}
