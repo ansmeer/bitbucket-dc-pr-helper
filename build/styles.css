@@ -5,3 +5,27 @@
 .bb-not-reviewed {
     background-color: #FFECEA;
 }
+
+#bb-review-toggle {
+    background-color: #F1F2F4;
+    border-radius: 3px;
+    font-weight: 500;
+    padding: 5px;
+}
+
+#bb-overview {
+    background-color: #F1F2F4;
+    border-radius: 3px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    padding: 5px;
+    text-align: center;
+}
+
+#bb-overview.complete {
+    background-color: #DCFFF1;
+}
+
+#bb-overview.incomplete {
+    background-color: #fff5dc;
+}
