@@ -47,6 +47,7 @@ const addCheckbox = (fileName: string, prId: number, eventListener: () => void, 
 	label.htmlFor = checkbox.id
 	label.textContent = "Reviewed"
 	const container = document.createElement("div")
+	container.id = "bb-review-toggle"
 	container.appendChild(checkbox)
 	container.appendChild(label)
 	container.addEventListener("mousedown", eventListener)

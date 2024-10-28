@@ -2,6 +2,7 @@ import { prStore } from "./store"
 import { addOrUpdateToggleButtonForCurrentFile, getCurrentFileName } from "./file"
 import { getCurrentPullRequest } from "./pullRequest"
 import { addStatusToTree } from "./tree"
+import { addOrUpdatePrOverview } from "./overview"
 
 const createEventListenerForToggle = (fileName: string, prId: number) => () => {
 	const { getState } = prStore
@@ -22,4 +23,5 @@ const findCurrentPrInterval = setInterval(() => {
 	const eventListener = createEventListenerForToggle(currentFileName, pullRequest.id)
 	addOrUpdateToggleButtonForCurrentFile(currentFileName, pullRequest.id, eventListener)
 	addStatusToTree(pullRequest)
+	addOrUpdatePrOverview(pullRequest)
 }, 100)

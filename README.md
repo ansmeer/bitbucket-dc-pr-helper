@@ -5,7 +5,8 @@ This Chrome extension allows you to mark individual files or a pull request as r
 ## Important notes
 
 - Files that are marked as "reviewed" and are changed later on are not automatically unmarked as reviewed.
-- Review-status is only persisted in local storage.
+- PR status is only persisted in local storage.
+- PR status is shown only when viewing all changes in the PR, not when viewing a single commit or a custom diff.
 - Host permissions are set to git.vegvesen.no, but you can easily customize it if your Atlassian Bitbucket Data Center
   instance is hosted elsewhere.
 
