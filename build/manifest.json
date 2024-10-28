@@ -1,6 +1,6 @@
 {
   "name": "Bitbucket Data Center Pull Request Helper",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Help with code review on Bitbucket Data Center",
   "manifest_version": 3,
   "permissions": [
