@@ -13,7 +13,7 @@ export const getCurrentFileName = (): string => {
 	return fileName
 }
 
-const getFileReviewedStatusFromStorage = (fileName: string, prId: number): boolean => {
+const getFileReviewedStatusFromStorage = (fileName: string, prId: string): boolean => {
 	const { getState } = prStore
 	const currentFile = getState()
 		.pullRequests.find((pr) => pr.id === prId)
@@ -38,7 +38,7 @@ export const getFiles = (): PrFile[] => {
 		.filter((f) => f !== null)
 }
 
-const addCheckbox = (fileName: string, prId: number, eventListener: () => void, diffActions: Element) => {
+const addCheckbox = (fileName: string, prId: string, eventListener: () => void, diffActions: Element) => {
 	const checkbox = document.createElement("input")
 	checkbox.type = "checkbox"
 	checkbox.id = `reviewedCheckbox`
@@ -54,7 +54,7 @@ const addCheckbox = (fileName: string, prId: number, eventListener: () => void, 
 	diffActions.insertBefore(container, diffActions.firstChild)
 }
 
-export const addOrUpdateToggleButtonForCurrentFile = (fileName: string, prId: number, eventListener: () => void) => {
+export const addOrUpdateToggleButtonForCurrentFile = (fileName: string, prId: string, eventListener: () => void) => {
 	const changeHeader = document.querySelector("header.change-header")
 	const diffActions = changeHeader?.querySelector("div.diff-actions")
 	if (!diffActions) {

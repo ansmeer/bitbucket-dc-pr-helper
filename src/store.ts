@@ -38,7 +38,7 @@ const prExists = (pullRequest: PullRequest, allPullRequests: PullRequest[]): boo
 	return allPullRequests.map((pr) => pr.id).includes(pullRequest.id)
 }
 
-const getPrById = (id: number, state: PrStore): PullRequest | undefined => {
+const getPrById = (id: string, state: PrStore): PullRequest | undefined => {
 	return state.pullRequests.find((pr) => pr.id === id)
 }
 

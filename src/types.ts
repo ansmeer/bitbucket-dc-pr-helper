@@ -4,12 +4,12 @@ export type PrFile = {
 }
 
 export type PullRequest = {
-	id: number
+	id: string
 	files: PrFile[]
 }
 
 export type PrStore = {
 	pullRequests: PullRequest[]
 	addOrUpdateStoredPullRequest: (pullRequest: PullRequest) => void
-	toggleReviewedStatus: (fileName: string, prId: number) => void
+	toggleReviewedStatus: (fileName: string, prId: string) => void
 }
