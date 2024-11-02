@@ -9,7 +9,13 @@ const createEventListenerForToggle = (fileName: string, prId: number) => () => {
 	getState().toggleReviewedStatus(fileName, prId)
 }
 
+let attemptCount = 0
 const findCurrentPrInterval = setInterval(() => {
+	attemptCount++
+	if (attemptCount >= 20) {
+		clearInterval(findCurrentPrInterval)
+	}
+
 	const pullRequest = getCurrentPullRequest()
 
 	if (pullRequest.files.length > 0) {
