@@ -10,7 +10,7 @@
     background-color: #F1F2F4;
     border-radius: 3px;
     font-weight: 500;
-    padding: 5px;
+    padding: 5px 8px;
 }
 
 #bb-overview {
@@ -18,7 +18,7 @@
     border-radius: 3px;
     font-weight: 500;
     margin-bottom: 8px;
-    padding: 5px;
+    padding: 5px 8px;
     text-align: center;
 }
 
@@ -28,4 +28,29 @@
 
 #bb-overview.incomplete {
     background-color: #fff5dc;
+}
+
+.bb-overview-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.bb-reset {
+    align-items: center;
+    background: none;
+    background-color: #F1F2F4;
+    border: none;
+    border-radius: 3px;
+    color: inherit;
+    display: flex;
+    font-weight: 500;
+    justify-content: center;
+    margin-bottom: 8px;
+    padding: 5px 8px;
+}
+
+.bb-reset:hover {
+    background-color: #091E4224;
+    cursor: pointer;
 }

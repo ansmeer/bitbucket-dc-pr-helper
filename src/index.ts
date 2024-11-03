@@ -1,13 +1,8 @@
 import { prStore } from "./store"
-import { addOrUpdateToggleButtonForCurrentFile, getCurrentFileName } from "./file"
-import { parseCurrentPullRequest } from "./pullRequest"
+import { addOrUpdateToggleButtonForCurrentFile } from "./file"
+import { getCurrentPrId, parseCurrentPullRequest } from "./pullRequest"
 import { addStatusToTree } from "./tree"
 import { addOrUpdatePrOverview } from "./overview"
-
-const createEventListenerForToggle = (fileName: string, prId: string) => () => {
-	const { getState } = prStore
-	getState().toggleReviewedStatus(fileName, prId)
-}
 
 let attemptCount = 0
 const findCurrentPrInterval = setInterval(() => {
@@ -25,9 +20,20 @@ const findCurrentPrInterval = setInterval(() => {
 	const { getState } = prStore
 	getState().addOrUpdateStoredPullRequest(pullRequest)
 
-	const currentFileName = getCurrentFileName()
-	const eventListener = createEventListenerForToggle(currentFileName, pullRequest.id)
-	addOrUpdateToggleButtonForCurrentFile(currentFileName, pullRequest.id, eventListener)
+	addOrUpdateToggleButtonForCurrentFile(pullRequest)
 	addStatusToTree(pullRequest)
 	addOrUpdatePrOverview(pullRequest)
 }, 100)
+
+prStore.subscribe(
+	(state) => state.pullRequests,
+	(pullRequests) => {
+		const currentPrId = getCurrentPrId()
+		const currentPr = pullRequests.find((pr) => pr.id === currentPrId)
+		if (currentPr) {
+			addOrUpdateToggleButtonForCurrentFile(currentPr)
+			addStatusToTree(currentPr)
+			addOrUpdatePrOverview(currentPr)
+		}
+	},
+)

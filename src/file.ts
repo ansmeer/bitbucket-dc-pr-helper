@@ -1,5 +1,5 @@
 import { prStore } from "./store"
-import { PrFile } from "./types"
+import { PrFile, PullRequest } from "./types"
 
 export const extractFileNameFromLink = (href: string): string => {
 	return href.split("diff#")[1].replace(/%2F/g, "/")
@@ -38,6 +38,11 @@ export const getFiles = (): PrFile[] => {
 		.filter((f) => f !== null)
 }
 
+const createEventListenerForToggle = (fileName: string, prId: string) => () => {
+	const { getState } = prStore
+	getState().toggleReviewedStatus(fileName, prId)
+}
+
 const addCheckbox = (fileName: string, prId: string, eventListener: () => void, diffActions: Element) => {
 	const checkbox = document.createElement("input")
 	checkbox.type = "checkbox"
@@ -54,7 +59,9 @@ const addCheckbox = (fileName: string, prId: string, eventListener: () => void, 
 	diffActions.insertBefore(container, diffActions.firstChild)
 }
 
-export const addOrUpdateToggleButtonForCurrentFile = (fileName: string, prId: string, eventListener: () => void) => {
+export const addOrUpdateToggleButtonForCurrentFile = (pullRequest: PullRequest) => {
+	const fileName = getCurrentFileName()
+	const eventListener = createEventListenerForToggle(fileName, pullRequest.id)
 	const changeHeader = document.querySelector("header.change-header")
 	const diffActions = changeHeader?.querySelector("div.diff-actions")
 	if (!diffActions) {
@@ -64,5 +71,5 @@ export const addOrUpdateToggleButtonForCurrentFile = (fileName: string, prId: st
 	if (reviewedCheckbox) {
 		reviewedCheckbox.parentElement?.remove()
 	}
-	addCheckbox(fileName, prId, eventListener, diffActions)
+	addCheckbox(fileName, pullRequest.id, eventListener, diffActions)
 }

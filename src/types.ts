@@ -12,4 +12,5 @@ export type PrStore = {
 	pullRequests: PullRequest[]
 	addOrUpdateStoredPullRequest: (pullRequest: PullRequest) => void
 	toggleReviewedStatus: (fileName: string, prId: string) => void
+	unmarkAllAsReviewed: (pullRequest: PullRequest) => void
 }
