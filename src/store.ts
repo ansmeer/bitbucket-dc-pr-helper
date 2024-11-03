@@ -29,6 +29,16 @@ export const prStore = createStore<PrStore>()(
 				}
 				get().addOrUpdateStoredPullRequest(updatedPr)
 			},
+			unmarkAllAsReviewed: (pullRequest: PullRequest) => {
+				const updatedPr = {
+					...pullRequest,
+					files: pullRequest.files.map((f) => {
+						f.reviewed = false
+						return f
+					}),
+				}
+				get().addOrUpdateStoredPullRequest(updatedPr)
+			},
 		})),
 		{ name: "pr-store" },
 	),

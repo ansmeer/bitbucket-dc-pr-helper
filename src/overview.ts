@@ -1,17 +1,5 @@
 import { PullRequest } from "./types"
 import { prStore } from "./store"
-import { getCurrentPrId } from "./pullRequest"
-
-prStore.subscribe(
-	(state) => state.pullRequests,
-	(pullRequests) => {
-		const currentPrId = getCurrentPrId()
-		const currentPr = pullRequests.find((pr) => pr.id === currentPrId)
-		if (currentPr) {
-			addOrUpdatePrOverview(currentPr)
-		}
-	},
-)
 
 export const addOrUpdatePrOverview = (pullRequest: PullRequest) => {
 	const reviewedFiles = pullRequest.files.filter((f) => f.reviewed)
@@ -33,6 +21,17 @@ export const addOrUpdatePrOverview = (pullRequest: PullRequest) => {
 		overviewElement.id = overviewId
 		overviewElement.className = isPrCompleted ? "complete" : "incomplete"
 		overviewElement.textContent = `reviewed ${reviewedFiles.length} of ${pullRequest.files.length} files (${statusPercentage}%)`
-		changesToolbar.insertBefore(overviewElement, changesToolbar.firstChild)
+
+		const unmarkAll = document.createElement("button")
+		unmarkAll.textContent = "Reset"
+		unmarkAll.title = "Reset all files to not reviewed"
+		unmarkAll.className = "bb-reset"
+		unmarkAll.addEventListener("mousedown", () => prStore.getState().unmarkAllAsReviewed(pullRequest))
+
+		const wrapper = document.createElement("div")
+		wrapper.className = "bb-overview-wrapper"
+		wrapper.appendChild(overviewElement)
+		wrapper.appendChild(unmarkAll)
+		changesToolbar.insertBefore(wrapper, changesToolbar.firstChild)
 	}
 }
