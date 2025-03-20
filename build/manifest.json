@@ -2,6 +2,11 @@
   "name": "Bitbucket Data Center Pull Request Helper",
   "version": "0.4",
   "description": "Help with code review on Bitbucket Data Center",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bb-dc-pr-helper@ansmeer.com"
+    }
+  },
   "manifest_version": 3,
   "permissions": [
     "webNavigation",
