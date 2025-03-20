@@ -27,5 +27,12 @@ const onCompleted = (details) => {
 
 const filter = { url: [{ hostEquals: "git.vegvesen.no" }] }
 
-chrome.tabs.onUpdated.addListener(onUpdated)
-chrome.webNavigation.onCompleted.addListener(onCompleted, filter)
+if (typeof browser == "undefined") {
+	// Chrome does not support the browser namespace yet.
+	globalThis.browser = chrome;
+}
+
+browser.runtime.onInstalled.addListener(() => {
+	browser.tabs.onUpdated.addListener(onUpdated)
+	browser.webNavigation.onCompleted.addListener(onCompleted, filter)
+});
