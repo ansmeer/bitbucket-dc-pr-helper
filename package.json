@@ -1,6 +1,6 @@
 {
   "name": "bitbucket-dc-pr-helper",
-  "version": "0.3",
+  "version": "0.4",
   "description": "Chrome extension to help with code review on Bitbucket Data Center",
   "scripts": {
     "build": "npx rollup -c"
