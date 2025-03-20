@@ -18,7 +18,10 @@ sed -i '' -e "s/\"version\": \".*\"/\"version\": \"$version\"/" package.json
 # Update manifest.json
 sed -i '' -e "s/\"version\": \".*\"/\"version\": \"$version\"/" build/manifest.json
 
+# Update package-lock.json
+npm i
+
 # Commit changes
-git add package.json build/manifest.json
+git add package.json package-lock.json build/manifest.json
 git commit -m "Release version $version"
 git tag "v$version"
